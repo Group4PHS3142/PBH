@@ -1,0 +1,157 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5538,        149]
+NotebookOptionsPosition[      5227,        135]
+NotebookOutlinePosition[      5584,        151]
+CellTagsIndexPosition[      5541,        148]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Numerically", " ", "Solving", "  ", 
+    RowBox[{"(", "18", ")"}]}], "*)"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{"Define", " ", "variables"}], "*)"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Use", " ", "alpha", " ", "a", " ", "smoothing", " ", "factor"}], 
+    ",", "  ", "a", ",", 
+    RowBox[{
+     RowBox[{
+     "otherwise", " ", "the", " ", "DE", " ", "will", " ", "become", " ", 
+      "sticky", " ", "when", " ", 
+      RowBox[{"\[Chi]", "[", "s", "]"}]}], " ", "=", " ", 
+     RowBox[{
+     "0.", " ", "The", " ", "period", " ", "of", " ", "the", " ", "output", 
+      " ", "is", " ", "sensitive", " ", "to", " ", "this", " ", "factor", " ",
+       "so", " ", "it", " ", "must", " ", "be", " ", "quite", " ", "small", 
+      " ", "but", " ", "not", " ", "so", " ", "small", " ", "that", " ", 
+      "the", " ", "DE", " ", "becomes", " ", 
+      RowBox[{"sticky", ".", " ", "To"}], " ", "make", " ", "the", " ", 
+      "problem", " ", "physical", " ", "we", " ", "could", " ", "use", " ", 
+      "the", " ", "Schwarzchild", " ", "mass", " ", "however"}]}], ",", " ", 
+    RowBox[{
+    "the", " ", "as", " ", "the", " ", "system", " ", "is", " ", "taken", " ",
+      "to", " ", "be", " ", "in", " ", "1", "D", " ", "we", " ", "may", " ", 
+     "forgo", " ", 
+     RowBox[{"this", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"a", "=", "0.01"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Lambda]", "=", "0.3"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "We", " ", "need", " ", "to", " ", "define", " ", "a", " ", "very", " ", 
+      "small", " ", "value"}], ",", " ", "\[Epsilon]", ",", " ", 
+     RowBox[{
+      RowBox[{
+      "such", " ", "that", " ", "the", " ", "DE", " ", "does", " ", "not", 
+       " ", "start", " ", "at", " ", 
+       RowBox[{"\[Chi]", "[", "0", "]"}]}], "=", "0"}], ",", " ", 
+     RowBox[{"as", " ", "at", " ", "this", " ", "point"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Epsilon]", "=", "$MachineEpsilon"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Use", " ", 
+     RowBox[{"mathematica", "'"}], "s", " ", "inbuilt", " ", "numerical", " ",
+      "DE", " ", "solver", " ", "with", " ", 
+     RowBox[{"(", "18", ")"}], " ", "and", " ", "the", " ", "given", " ", 
+     "initial", " ", "conditions", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+       "with", " ", "the", " ", "slight", " ", "changes", " ", "of", " ", 
+        "\[Epsilon]", " ", "and", " ", "a", " ", "so", " ", "that", " ", 
+        "our", " ", "solution", " ", "is", " ", "not", " ", "sticky"}], ")"}],
+       "."}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"NDSolve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"\[Chi]", "''"}], "[", "s", "]"}], "-", 
+         RowBox[{
+          FractionBox["1", 
+           SuperscriptBox["s", "2"]], 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"s", "*", 
+             RowBox[{
+              RowBox[{"\[Chi]", "'"}], "[", "s", "]"}]}], "-", 
+            RowBox[{"\[Chi]", "[", "s", "]"}]}], ")"}]}], "+", 
+         RowBox[{
+          FractionBox["1", "\[Lambda]"], "*", 
+          FractionBox[
+           SuperscriptBox["s", "2"], 
+           RowBox[{"(", 
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"\[Chi]", "[", "s", "]"}], ")"}], "2"], "+", 
+             SuperscriptBox["a", "2"]}], ")"}]], "*", 
+          RowBox[{"Sign", "[", 
+           RowBox[{"\[Chi]", "[", "s", "]"}], "]"}]}]}], "\[Equal]", "0"}], 
+       ",", 
+       RowBox[{
+        RowBox[{"\[Chi]", "[", "\[Epsilon]", "]"}], "\[Equal]", 
+        "\[Epsilon]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"\[Chi]", "'"}], "[", "\[Epsilon]", "]"}], "==", "1"}]}], 
+      "}"}], ",", 
+     RowBox[{"\[Chi]", "[", "s", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"s", ",", "\[Epsilon]", ",", "2"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "This", " ", "outputs", " ", "an", " ", "interpolated", " ", "function", 
+     " ", "that", " ", "we", " ", "can", " ", "then", " ", "plot", " ", "or", 
+     " ", "output", " ", "the", " ", "data", " ", "for", " ", 
+     RowBox[{"plotting", "."}]}], "*)"}]}]}]], "Input",
+ CellChangeTimes->{{3.746259050031188*^9, 3.746259067997445*^9}, {
+  3.746259126121996*^9, 3.746259156584075*^9}, {3.7463539871172857`*^9, 
+  3.746353989511801*^9}},ExpressionUUID->"f8fee81f-42d1-4a81-9c52-\
+dec15bdf616c"]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{Automatic, -103}, {6, Automatic}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
+2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4665, 113, 334, "Input",ExpressionUUID->"f8fee81f-42d1-4a81-9c52-dec15bdf616c"]
+}
+]
+*)
+
